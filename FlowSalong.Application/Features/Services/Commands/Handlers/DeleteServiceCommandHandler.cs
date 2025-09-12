@@ -10,11 +10,11 @@ public class DeleteServiceCommandHandler(IRepository<Service> repository)
 {
     public async Task<OperationResult<bool>> Handle(DeleteServiceCommand request, CancellationToken cancellationToken)
     {
-        var entity = await repository.GetByIdAsync(request.Id);
-        if (entity is null)
+        var existing = await repository.GetByIdAsync(request.Id);
+        if (existing is null)
             return OperationResult<bool>.Fail("Service not found");
 
-        await repository.DeleteAsync(entity);
+        await repository.DeleteAsync(existing);
         return OperationResult<bool>.Ok(true);
     }
 }

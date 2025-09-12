@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using FlowSalong.Application.Common.Models;
-using FlowSalong.Domain.Entities;
-using FlowSalong.Application.Features.Customers.Dtos;
+using FlowSalong.Application.Features.Customers.DTOs;
 
 namespace FlowSalong.Application.Features.Customers.Commands;
 
-public record UpdateCustomerCommand(int Id, CustomerUpdateDto CustomerDto) : IRequest<OperationResult<Customer>>;
+public record UpdateCustomerCommand(int Id, CustomerDto Customer) : IRequest<OperationResult<CustomerDto>>;

@@ -11,16 +11,16 @@ public class UpdateServiceCommandHandler(IRepository<Service> repository)
 {
     public async Task<OperationResult<ServiceDto>> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
     {
-        var entity = await repository.GetByIdAsync(request.Id);
-        if (entity is null)
+        var existing = await repository.GetByIdAsync(request.Id);
+        if (existing is null)
             return OperationResult<ServiceDto>.Fail("Service not found");
 
-        entity.Name = request.Name;
-        entity.Price = request.Price;
+        existing.Name = request.Name;
+        existing.Price = request.Price;
 
-        await repository.UpdateAsync(entity);
+        await repository.UpdateAsync(existing);
 
-        var dto = new ServiceDto(entity.Id, entity.Name, entity.Price);
+        var dto = new ServiceDto(existing.Id, existing.Name, existing.Price);
         return OperationResult<ServiceDto>.Ok(dto);
     }
 }

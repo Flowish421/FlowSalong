@@ -1,0 +1,12 @@
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\bin\Debug\net8.0\FlowSalong.Domain.deps.json
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\bin\Debug\net8.0\FlowSalong.Domain.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\bin\Debug\net8.0\FlowSalong.Domain.pdb
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.AssemblyInfoInputs.cache
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.AssemblyInfo.cs
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.sourcelink.json
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\refint\FlowSalong.Domain.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\FlowSalong.Domain.pdb
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Domain\obj\Debug\net8.0\ref\FlowSalong.Domain.dll

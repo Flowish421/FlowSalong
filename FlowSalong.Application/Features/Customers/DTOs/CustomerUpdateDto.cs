@@ -1,3 +1,8 @@
-﻿namespace FlowSalong.Application.Features.Customers.Dtos;
+﻿namespace FlowSalong.Application.Features.Customers.DTOs;
 
-public record CustomerUpdateDto(string FirstName, string LastName, string Email);
+public record CustomerUpdateDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = null!;
+    public string Email { get; set; } = null!;
+}

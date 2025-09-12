@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using FlowSalong.Application.Common.Models;
-using FlowSalong.Domain.Entities;
+using FlowSalong.Application.Features.Customers.DTOs;
 
 namespace FlowSalong.Application.Features.Customers.Queries;
 
-public record GetCustomerByIdQuery(int Id) : IRequest<OperationResult<Customer>>;
+public record GetCustomerByIdQuery(int Id) : IRequest<OperationResult<CustomerDto>>;

@@ -5,10 +5,10 @@ namespace FlowSalong.Infrastructure.Persistence;
 
 public class FlowSalongDbContext : DbContext
 {
-    public FlowSalongDbContext(DbContextOptions<FlowSalongDbContext> options) : base(options) { }
+    public FlowSalongDbContext(DbContextOptions<FlowSalongDbContext> options)
+        : base(options) { }
 
-    public DbSet<Service> Services { get; set; } = null!;
-
-    // existerande DbSets (Customers etc)
-    // public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<Service> Services => Set<Service>();
+    public DbSet<Staff> Staffs => Set<Staff>();
 }

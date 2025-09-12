@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using FlowSalong.Application.Common.Interfaces;
 using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Customers.Commands;
-using FlowSalong.Application.Common.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FlowSalong.Application.Features.Customers.Commands.Handlers;
 
@@ -9,20 +11,16 @@ public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerComman
 {
     private readonly ICustomerRepository _repository;
 
-    public DeleteCustomerCommandHandler(ICustomerRepository repository)
-    {
-        _repository = repository;
-    }
+    public DeleteCustomerCommandHandler(ICustomerRepository repository) => _repository = repository;
 
     public async Task<OperationResult<bool>> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
-        // Hämta först customer
         var existing = await _repository.GetByIdAsync(request.Id);
-        if (existing == null)
+
+        if (existing is null)
             return OperationResult<bool>.Fail("Customer not found");
 
-        // Skicka endast Id eller Customer till repository beroende på signatur
-        await _repository.DeleteAsync(request.Id); // <-- ändrat från 'existing' till 'request.Id'
+        await _repository.DeleteAsync(existing);
 
         return OperationResult<bool>.Ok(true);
     }

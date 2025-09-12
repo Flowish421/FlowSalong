@@ -1,36 +1,39 @@
 ﻿using MediatR;
+using FlowSalong.Application.Common.Interfaces;
 using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Customers.Commands;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Domain.Entities;
+using FlowSalong.Application.Features.Customers.DTOs;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FlowSalong.Application.Features.Customers.Commands.Handlers;
 
-public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, OperationResult<Customer>>
+public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, OperationResult<CustomerDto>>
 {
     private readonly ICustomerRepository _repository;
 
-    public UpdateCustomerCommandHandler(ICustomerRepository repository)
-    {
-        _repository = repository;
-    }
+    public UpdateCustomerCommandHandler(ICustomerRepository repository) => _repository = repository;
 
-    public async Task<OperationResult<Customer>> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult<CustomerDto>> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var existing = await _repository.GetByIdAsync(request.Id);
-        if (existing == null)
-            return OperationResult<Customer>.Fail("Customer not found");
+        // Hämta kunden via repository
+        var existingCustomer = await _repository.GetByIdAsync(request.Customer.Id);
 
-        var updated = new Customer(
-            request.CustomerDto.FirstName,
-            request.CustomerDto.LastName,
-            request.CustomerDto.Email
-        )
+        if (existingCustomer == null)
+            return OperationResult<CustomerDto>.Fail("Customer not found");
+
+        // Uppdatera fälten
+        existingCustomer.Name = request.Customer.Name;
+        existingCustomer.Email = request.Customer.Email;
+
+        await _repository.UpdateAsync(existingCustomer);
+
+        // Returnera resultat
+        return OperationResult<CustomerDto>.Ok(new CustomerDto
         {
-            Id = existing.Id // behåll samma Id
-        };
-
-        await _repository.UpdateAsync(updated);
-        return OperationResult<Customer>.Ok(updated);
+            Id = existingCustomer.Id,
+            Name = existingCustomer.Name,
+            Email = existingCustomer.Email
+        });
     }
 }

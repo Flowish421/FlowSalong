@@ -1,0 +1,16 @@
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\bin\Debug\net8.0\FlowSalong.Application.deps.json
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\bin\Debug\net8.0\FlowSalong.Application.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\bin\Debug\net8.0\FlowSalong.Application.pdb
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\bin\Debug\net8.0\FlowSalong.Domain.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\bin\Debug\net8.0\FlowSalong.Domain.pdb
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.csproj.AssemblyReference.cache
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.AssemblyInfoInputs.cache
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.AssemblyInfo.cs
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.csproj.CoreCompileInputs.cache
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.sourcelink.json
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalo.2C467587.Up2Date
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\refint\FlowSalong.Application.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\FlowSalong.Application.pdb
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Application\obj\Debug\net8.0\ref\FlowSalong.Application.dll
