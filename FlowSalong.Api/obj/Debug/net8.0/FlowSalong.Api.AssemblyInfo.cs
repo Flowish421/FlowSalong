@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlowSalong.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0aed91e884c0ffa667efaa837167dd122641450a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54373b71a777af9f861b76d954665db4db86b1f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlowSalong.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlowSalong.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
