@@ -93,3 +93,4 @@ C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Api\obj\Debug\net8.0\
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Api\obj\Debug\net8.0\FlowSalong.Api.pdb
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Api\obj\Debug\net8.0\FlowSalong.Api.genruntimeconfig.cache
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Api\obj\Debug\net8.0\ref\FlowSalong.Api.dll
+C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
