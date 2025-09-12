@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlowSalong.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f59e53a6cd6999d5e5985dd0b4985d65f8a46c9d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2b3e04099ae4d6942cd20fa97bce9d3e8f1ed4e")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlowSalong.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlowSalong.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

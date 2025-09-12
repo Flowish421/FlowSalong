@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "muGMY311hGU=",
+  "dgSpecHash": "3cUHt1r0l8I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ahmed\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ahmed\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

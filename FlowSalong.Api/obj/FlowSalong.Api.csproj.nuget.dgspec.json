@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Api\\FlowSalong.Api.csproj": {}
+    "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Api\\FlowSalong.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Api\\FlowSalong.Api.csproj": {
+    "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Api\\FlowSalong.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Api\\FlowSalong.Api.csproj",
+        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Api\\FlowSalong.Api.csproj",
         "projectName": "FlowSalong.Api",
-        "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Api\\FlowSalong.Api.csproj",
+        "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Api\\FlowSalong.Api.csproj",
         "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Api\\obj\\",
+        "outputPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
-                "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj"
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj"
               },
-              "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj"
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj"
               }
             }
           }
@@ -102,14 +102,14 @@
         }
       }
     },
-    "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
+    "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj",
+        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj",
         "projectName": "FlowSalong.Application",
-        "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj",
+        "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj",
         "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\obj\\",
+        "outputPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -131,8 +131,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
-                "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
               }
             }
           }
@@ -186,14 +186,14 @@
         }
       }
     },
-    "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
+    "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj",
         "projectName": "FlowSalong.Domain",
-        "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj",
+        "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj",
         "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\obj\\",
+        "outputPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -252,14 +252,14 @@
         }
       }
     },
-    "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj": {
+    "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj",
         "projectName": "FlowSalong.Infrastructure",
-        "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -281,11 +281,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
-                "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Application\\FlowSalong.Application.csproj"
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj"
               },
-              "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
-                "projectPath": "C:\\Users\\ahmed\\source\\repos\\FlowSalong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
               }
             }
           }

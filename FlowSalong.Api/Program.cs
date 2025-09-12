@@ -16,6 +16,9 @@ builder.Services.AddDbContext<FlowSalongDbContext>(options =>
 // ---------------------------
 // Repository
 // ---------------------------
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 // ---------------------------
