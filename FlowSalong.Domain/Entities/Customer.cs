@@ -1,8 +1,11 @@
-﻿namespace FlowSalong.Domain.Entities;
+﻿using System;
 
-public class Customer
+namespace FlowSalong.Domain.Entities
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Email { get; set; } = null!;
+    public class Customer
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Email { get; set; } = null!;
+    }
 }

@@ -7,12 +7,13 @@ namespace FlowSalong.Application.Features.Staffs.Validators
     {
         public CreateStaffCommandValidator()
         {
-            RuleFor(x => x.Staff.Name)
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is required")
                 .MaximumLength(100).WithMessage("Name cannot exceed 100 characters");
 
-            RuleFor(x => x.Staff.Role)
-                .NotEmpty().WithMessage("Role is required");
+            RuleFor(x => x.Role)
+                .NotEmpty().WithMessage("Role is required")
+                .MaximumLength(50).WithMessage("Role cannot exceed 50 characters");
         }
     }
 
@@ -20,13 +21,16 @@ namespace FlowSalong.Application.Features.Staffs.Validators
     {
         public UpdateStaffCommandValidator()
         {
-            RuleFor(x => x.Staff.Id).GreaterThan(0).WithMessage("Staff Id must be provided");
-            RuleFor(x => x.Staff.Name)
+            RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
+
+
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is required")
                 .MaximumLength(100).WithMessage("Name cannot exceed 100 characters");
 
-            RuleFor(x => x.Staff.Role)
-                .NotEmpty().WithMessage("Role is required");
+            RuleFor(x => x.Role)
+                .NotEmpty().WithMessage("Role is required")
+                .MaximumLength(50).WithMessage("Role cannot exceed 50 characters");
         }
     }
 }

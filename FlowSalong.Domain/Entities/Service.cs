@@ -1,8 +1,14 @@
-﻿namespace FlowSalong.Domain.Entities;
+﻿using System;
 
-public class Service
+namespace FlowSalong.Domain.Entities
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public decimal Price { get; set; }
+    public class Service
+    {
+        // 🔑 Byt till Guid så att det matchar repository och handlers
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        public string Name { get; set; } = string.Empty;
+
+        public decimal Price { get; set; }
+    }
 }

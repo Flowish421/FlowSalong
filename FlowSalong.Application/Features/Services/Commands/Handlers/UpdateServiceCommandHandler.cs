@@ -1,26 +1,28 @@
-﻿using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
+using FlowSalong.Domain.Common.Interfaces;
 using FlowSalong.Application.Features.Services.DTOs;
-using FlowSalong.Domain.Entities;
 using MediatR;
 
-namespace FlowSalong.Application.Features.Services.Commands.Handlers;
-
-public class UpdateServiceCommandHandler(IRepository<Service> repository)
-    : IRequestHandler<UpdateServiceCommand, OperationResult<ServiceDto>>
+namespace FlowSalong.Application.Features.Services.Commands.Handlers
 {
-    public async Task<OperationResult<ServiceDto>> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
+    public class UpdateServiceCommandHandler
+        : IRequestHandler<UpdateServiceCommand, OperationResult<ServiceDto>>
     {
-        var existing = await repository.GetByIdAsync(request.Id);
-        if (existing is null)
-            return OperationResult<ServiceDto>.Fail("Service not found");
+        private readonly IFlowSalongDbContext _context;
 
-        existing.Name = request.Name;
-        existing.Price = request.Price;
+        public UpdateServiceCommandHandler(IFlowSalongDbContext context) => _context = context;
 
-        await repository.UpdateAsync(existing);
+        public async Task<OperationResult<ServiceDto>> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
+        {
+            var service = await _context.Services.FindAsync(new object[] { request.Id }, cancellationToken);
+            if (service == null)
+                return OperationResult<ServiceDto>.Fail("Service not found");
 
-        var dto = new ServiceDto(existing.Id, existing.Name, existing.Price);
-        return OperationResult<ServiceDto>.Ok(dto);
+            service.Name = request.Name;
+            service.Price = request.Price;
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return OperationResult<ServiceDto>.Ok(new ServiceDto(service.Id, service.Name, service.Price));
+        }
     }
 }

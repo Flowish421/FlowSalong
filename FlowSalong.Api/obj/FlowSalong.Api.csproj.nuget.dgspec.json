@@ -36,6 +36,9 @@
               "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
                 "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj"
               },
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
+              },
               "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj"
               }
@@ -58,9 +61,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.*, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[12.0.0, )"
             },
             "FluentValidation.AspNetCore": {
               "target": "Package",
@@ -68,11 +79,19 @@
             },
             "MediatR": {
               "target": "Package",
-              "version": "[12.0.1, )"
+              "version": "[11.1.0, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.*, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.9, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -133,6 +152,9 @@
             "projectReferences": {
               "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
                 "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
+              },
+              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Infrastructure\\FlowSalong.Infrastructure.csproj"
               }
             }
           }
@@ -155,7 +177,11 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[12.*, )"
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
             },
             "FluentValidation": {
               "target": "Package",
@@ -163,7 +189,7 @@
             },
             "MediatR": {
               "target": "Package",
-              "version": "[12.0.1, )"
+              "version": "[11.1.0, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
@@ -236,6 +262,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -285,9 +317,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj": {
-                "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Application\\FlowSalong.Application.csproj"
-              },
               "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj": {
                 "projectPath": "C:\\Users\\ahmed\\source\\repos\\byttclone av salong\\FlowSalong.Domain\\FlowSalong.Domain.csproj"
               }
@@ -312,7 +341,7 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.*, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -326,7 +355,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.*, )"
+              "version": "[9.0.9, )"
             }
           },
           "imports": [

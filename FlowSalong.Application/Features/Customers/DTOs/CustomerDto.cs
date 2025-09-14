@@ -1,8 +1,6 @@
-﻿namespace FlowSalong.Application.Features.Customers.DTOs;
+﻿using System;
 
-public record CustomerDto
+namespace FlowSalong.Application.Features.Customers.DTOs
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Email { get; set; } = null!;
+    public record CustomerDto(Guid Id, string Name, string Email);
 }

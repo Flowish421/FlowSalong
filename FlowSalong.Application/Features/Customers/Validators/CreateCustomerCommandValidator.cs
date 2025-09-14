@@ -1,33 +1,17 @@
 ﻿using FluentValidation;
-using FlowSalong.Application.Features.Customers.Commands;
+using FlowSalong.Application.Features.Services.Commands;
 
-namespace FlowSalong.Application.Features.Customers.Validators
+namespace FlowSalong.Application.Features.Services.Validators
 {
-    public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
+    public class CreateServiceCommandValidator : AbstractValidator<CreateServiceCommand>
     {
-        public CreateCustomerCommandValidator()
+        public CreateServiceCommandValidator()
         {
-            RuleFor(x => x.Customer.Name)
-                .NotEmpty().WithMessage("Name is required")
-                .MaximumLength(100).WithMessage("Name cannot exceed 100 characters");
+            RuleFor(s => s.Name)
+                .NotEmpty().WithMessage("Tjänstens namn krävs.");
 
-            RuleFor(x => x.Customer.Email)
-                .NotEmpty().WithMessage("Email is required")
-                .EmailAddress().WithMessage("Invalid email format");
-        }
-    }
-
-    public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
-    {
-        public UpdateCustomerCommandValidator()
-        {
-            RuleFor(x => x.Customer.Id).GreaterThan(0).WithMessage("Customer Id must be provided");
-            RuleFor(x => x.Customer.Name)
-                .NotEmpty().WithMessage("Name is required")
-                .MaximumLength(100).WithMessage("Name cannot exceed 100 characters");
-            RuleFor(x => x.Customer.Email)
-                .NotEmpty().WithMessage("Email is required")
-                .EmailAddress().WithMessage("Invalid email format");
+            RuleFor(s => s.Price)
+                .GreaterThan(0).WithMessage("Priset måste vara större än 0.");
         }
     }
 }

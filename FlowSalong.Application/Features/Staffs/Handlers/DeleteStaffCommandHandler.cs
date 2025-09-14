@@ -1,28 +1,28 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.Commands;
+using FlowSalong.Application.Features.Staffs.DTOs;
 using FlowSalong.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
+using FlowSalong.Domain.Common.Interfaces;
 
-namespace FlowSalong.Application.Features.Staffs.Handlers;
-
-public class DeleteStaffCommandHandler : IRequestHandler<DeleteStaffCommand, OperationResult<bool>>
+namespace FlowSalong.Application.Features.Staffs.Handlers
 {
-    private readonly IRepository<Staff> _repository;
-
-    public DeleteStaffCommandHandler(IRepository<Staff> repository) => _repository = repository;
-
-    public async Task<OperationResult<bool>> Handle(DeleteStaffCommand request, CancellationToken cancellationToken)
+    public class DeleteStaffCommandHandler
     {
-        var existing = await _repository.GetByIdAsync(request.Id);
+        private readonly IFlowSalongDbContext _context;
 
-        if (existing is null)
-            return OperationResult<bool>.Fail("Staff not found");
+        public DeleteStaffCommandHandler(IFlowSalongDbContext context)
+        {
+            _context = context;
+        }
 
-        await _repository.DeleteAsync(existing);
+        public OperationResult<bool> Handle(DeleteStaffCommand request)
+        {
+            var staff = _context.Staffs.FirstOrDefault(s => s.Id == request.Id);
+            if (staff == null)
+                return OperationResult<bool>.Fail("Staff not found");
 
-        return OperationResult<bool>.Ok(true);
+            _context.Staffs.Remove(staff);
+            return OperationResult<bool>.Ok(true);
+        }
     }
 }

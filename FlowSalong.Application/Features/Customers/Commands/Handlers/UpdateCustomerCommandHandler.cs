@@ -1,39 +1,33 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
-using FlowSalong.Application.Features.Customers.Commands;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Customers.DTOs;
-using System.Threading;
-using System.Threading.Tasks;
+using FlowSalong.Application.Features.Customers.Commands;
+using MediatR;
+using FlowSalong.Domain.Common.Interfaces;
 
 namespace FlowSalong.Application.Features.Customers.Commands.Handlers;
 
 public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, OperationResult<CustomerDto>>
 {
-    private readonly ICustomerRepository _repository;
+    private readonly IFlowSalongDbContext _context;
 
-    public UpdateCustomerCommandHandler(ICustomerRepository repository) => _repository = repository;
+    public UpdateCustomerCommandHandler(IFlowSalongDbContext context)
+    {
+        _context = context;
+    }
 
     public async Task<OperationResult<CustomerDto>> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        // Hämta kunden via repository
-        var existingCustomer = await _repository.GetByIdAsync(request.Customer.Id);
+        var customer = _context.Customers.FirstOrDefault(c => c.Id == request.Id);
 
-        if (existingCustomer == null)
+        if (customer == null)
             return OperationResult<CustomerDto>.Fail("Customer not found");
 
-        // Uppdatera fälten
-        existingCustomer.Name = request.Customer.Name;
-        existingCustomer.Email = request.Customer.Email;
+        customer.Name = request.Name;
+        customer.Email = request.Email;
 
-        await _repository.UpdateAsync(existingCustomer);
+        await _context.SaveChangesAsync(cancellationToken);
 
-        // Returnera resultat
-        return OperationResult<CustomerDto>.Ok(new CustomerDto
-        {
-            Id = existingCustomer.Id,
-            Name = existingCustomer.Name,
-            Email = existingCustomer.Email
-        });
+        var dto = new CustomerDto(customer.Id, customer.Name, customer.Email);
+        return OperationResult<CustomerDto>.Ok(dto);
     }
 }

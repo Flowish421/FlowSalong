@@ -1,7 +1,9 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.DTOs;
+using MediatR;
 
 namespace FlowSalong.Application.Features.Staffs.Commands;
 
-public record UpdateStaffCommand(int Id, StaffDto Staff) : IRequest<OperationResult<StaffDto>>;
+public record UpdateStaffCommand(Guid Id, string Name, string Role)
+    : IRequest<OperationResult<StaffDto>>;
+

@@ -1,35 +1,38 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Customers.Commands;
 using FlowSalong.Application.Features.Customers.DTOs;
+using FlowSalong.Domain.Common.Interfaces; // 👈 Korrekt namespace för repos
 using FlowSalong.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
+using MediatR;
 
-namespace FlowSalong.Application.Features.Customers.Commands.Handlers;
-
-public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, OperationResult<CustomerDto>>
+namespace FlowSalong.Application.Features.Customers.Commands.Handlers
 {
-    private readonly ICustomerRepository _repository;
-
-    public CreateCustomerCommandHandler(ICustomerRepository repository) => _repository = repository;
-
-    public async Task<OperationResult<CustomerDto>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+    public class CreateCustomerCommandHandler
+        : IRequestHandler<CreateCustomerCommand, OperationResult<CustomerDto>>
     {
-        var customer = new Customer
-        {
-            Name = request.Customer.Name,
-            Email = request.Customer.Email
-        };
+        private readonly ICustomerRepository _repository;
 
-        await _repository.AddAsync(customer);
-
-        return OperationResult<CustomerDto>.Ok(new CustomerDto
+        public CreateCustomerCommandHandler(ICustomerRepository repository)
         {
-            Id = customer.Id,
-            Name = customer.Name,
-            Email = customer.Email
-        });
+            _repository = repository;
+        }
+
+        public async Task<OperationResult<CustomerDto>> Handle(
+            CreateCustomerCommand request,
+            CancellationToken cancellationToken)
+        {
+            var customer = new Customer
+            {
+                Name = request.Name,
+                Email = request.Email
+            };
+
+            await _repository.AddAsync(customer);
+
+            var dto = new CustomerDto(customer.Id, customer.Name, customer.Email);
+            return OperationResult<CustomerDto>.Ok(dto);
+        }
     }
 }

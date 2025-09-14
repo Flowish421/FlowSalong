@@ -1,37 +1,32 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.Commands;
 using FlowSalong.Application.Features.Staffs.DTOs;
-using FlowSalong.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
+using FlowSalong.Domain.Common.Interfaces;
+using MediatR;
 
 namespace FlowSalong.Application.Features.Staffs.Handlers;
 
 public class UpdateStaffCommandHandler : IRequestHandler<UpdateStaffCommand, OperationResult<StaffDto>>
 {
-    private readonly IRepository<Staff> _repository;
+    private readonly IFlowSalongDbContext _context;
 
-    public UpdateStaffCommandHandler(IRepository<Staff> repository) => _repository = repository;
+    public UpdateStaffCommandHandler(IFlowSalongDbContext context)
+    {
+        _context = context;
+    }
 
     public async Task<OperationResult<StaffDto>> Handle(UpdateStaffCommand request, CancellationToken cancellationToken)
     {
-        var existing = await _repository.GetByIdAsync(request.Staff.Id);
-
-        if (existing is null)
+        var staff = _context.Staffs.FirstOrDefault(s => s.Id == request.Id);
+        if (staff == null)
             return OperationResult<StaffDto>.Fail("Staff not found");
 
-        existing.Name = request.Staff.Name;
-        existing.Role = request.Staff.Role;
+        staff.Name = request.Name;
+        staff.Role = request.Role;
 
-        await _repository.UpdateAsync(existing);
+        await _context.SaveChangesAsync(cancellationToken);
 
-        return OperationResult<StaffDto>.Ok(new StaffDto
-        {
-            Id = existing.Id,
-            Name = existing.Name,
-            Role = existing.Role
-        });
+        var staffDto = new StaffDto(staff.Id, staff.Name, staff.Role);
+        return OperationResult<StaffDto>.Ok(staffDto);
     }
 }

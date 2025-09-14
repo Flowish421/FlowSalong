@@ -1,6 +1,11 @@
-﻿public class Staff
+﻿using System;
+
+namespace FlowSalong.Domain.Entities
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Role { get; set; } = null!; 
+    public class Staff
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Role { get; set; } = null!;
+    }
 }

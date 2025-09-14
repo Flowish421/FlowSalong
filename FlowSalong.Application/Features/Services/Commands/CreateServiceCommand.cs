@@ -1,6 +1,12 @@
 ﻿using FlowSalong.Application.Common.Models;
-using MediatR;
+using FlowSalong.Application.Features.Services.DTOs;
 
-namespace FlowSalong.Application.Features.Services.Commands;
 
-public record CreateServiceCommand(string Name, decimal Price) : IRequest<OperationResult<FlowSalong.Application.Features.Services.DTOs.ServiceDto>>;
+namespace FlowSalong.Application.Features.Services.Commands
+{
+    public class CreateServiceCommand : MediatR.IRequest<OperationResult<ServiceDto>>
+    {
+        public string Name { get; set; } = null!;
+        public decimal Price { get; set; }
+    }
+}

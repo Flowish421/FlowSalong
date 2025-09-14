@@ -1,38 +1,35 @@
-using FlowSalong.Application.Common.Behaviors;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Features.Customers.Commands;
-using FlowSalong.Infrastructure.Persistence;
-using FlowSalong.Infrastructure.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using System.Reflection;
+
+using FlowSalong.Application.Common.Behaviors;
+using FlowSalong.Application.Common.Mappings;
+using FlowSalong.Application.Features.Customers.Commands;
+using FlowSalong.Domain.Common.Interfaces;
+using FlowSalong.Infrastructure.Persistence;
+using FlowSalong.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ---------------------------
-// DbContext (InMemory)
-// ---------------------------
 builder.Services.AddDbContext<FlowSalongDbContext>(options =>
-    options.UseInMemoryDatabase("FlowSalongDb"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ---------------------------
-// Repository
-// ---------------------------
+builder.Services.AddScoped<IFlowSalongDbContext>(sp => sp.GetRequiredService<FlowSalongDbContext>());
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IStaffRepository, StaffRepository>(); 
 
-// ---------------------------
-// MediatR
-// ---------------------------
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCustomerCommand>());
+builder.Services.AddMediatR(typeof(CreateCustomerCommand).Assembly); 
 
-// ---------------------------
-// Validators
-// ---------------------------
+builder.Services.AddAutoMapper(typeof(CommonMappingProfile).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCustomerCommand>();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-// ---------------------------
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

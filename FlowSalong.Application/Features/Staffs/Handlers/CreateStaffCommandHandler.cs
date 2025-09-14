@@ -1,35 +1,41 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.Commands;
 using FlowSalong.Application.Features.Staffs.DTOs;
+using FlowSalong.Domain.Common.Interfaces;
 using FlowSalong.Domain.Entities;
+using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FlowSalong.Application.Features.Staffs.Handlers;
-
-public class CreateStaffCommandHandler : IRequestHandler<CreateStaffCommand, OperationResult<StaffDto>>
+namespace FlowSalong.Application.Features.Staffs.Handlers
 {
-    private readonly IRepository<Staff> _repository;
-
-    public CreateStaffCommandHandler(IRepository<Staff> repository) => _repository = repository;
-
-    public async Task<OperationResult<StaffDto>> Handle(CreateStaffCommand request, CancellationToken cancellationToken)
+    public class CreateStaffCommandHandler
+        : IRequestHandler<CreateStaffCommand, OperationResult<StaffDto>>
     {
-        var staff = new Staff
-        {
-            Name = request.Staff.Name,
-            Role = request.Staff.Role
-        };
+        private readonly IFlowSalongDbContext _context;
 
-        await _repository.AddAsync(staff);
-
-        return OperationResult<StaffDto>.Ok(new StaffDto
+        public CreateStaffCommandHandler(IFlowSalongDbContext context)
         {
-            Id = staff.Id,
-            Name = staff.Name,
-            Role = staff.Role
-        });
+            _context = context;
+        }
+
+        public async Task<OperationResult<StaffDto>> Handle(
+            CreateStaffCommand request,
+            CancellationToken cancellationToken)
+        {
+            var staff = new Staff
+            {
+                Id = Guid.NewGuid(),      // 🔑 Generera nytt Guid för Staff
+                Name = request.Name,
+                Role = request.Role
+            };
+
+            _context.Staffs.Add(staff);   // ✅ Använder DbSet<Staff> Staffs
+            await _context.SaveChangesAsync(cancellationToken);
+
+            var staffDto = new StaffDto(staff.Id, staff.Name, staff.Role);
+            return OperationResult<StaffDto>.Ok(staffDto);
+        }
     }
 }

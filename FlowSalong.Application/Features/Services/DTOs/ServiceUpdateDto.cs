@@ -1,7 +1,8 @@
-﻿namespace FlowSalong.Application.Features.Services.DTOs;
-
-public record ServiceUpdateDto(
-    int Id,
-    string Name,
-    decimal Price
-);
+﻿namespace FlowSalong.Application.Features.Services.DTOs
+{
+    public record ServiceUpdateDto(
+        System.Guid Id,
+        string Name,
+        decimal Price
+    );
+}

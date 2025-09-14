@@ -1,31 +1,34 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Customers.DTOs;
 using FlowSalong.Application.Features.Customers.Queries;
-using System.Threading;
-using System.Threading.Tasks;
+using FlowSalong.Domain.Common.Interfaces;
+using MediatR;
 
-namespace FlowSalong.Application.Features.Customers.Queries.Handlers;
-
-public class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, OperationResult<CustomerDto>>
+namespace FlowSalong.Application.Features.Customers.Queries.Handlers
 {
-    private readonly ICustomerRepository _repository;
-
-    public GetCustomerByIdQueryHandler(ICustomerRepository repository) => _repository = repository;
-
-    public async Task<OperationResult<CustomerDto>> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+    public class GetCustomerByIdQueryHandler
+        : IRequestHandler<GetCustomerByIdQuery, OperationResult<CustomerDto>>
     {
-        var existing = await _repository.GetByIdAsync(request.Id);
+        private readonly ICustomerRepository _repository;
 
-        if (existing is null)
-            return OperationResult<CustomerDto>.Fail("Customer not found");
-
-        return OperationResult<CustomerDto>.Ok(new CustomerDto
+        public GetCustomerByIdQueryHandler(ICustomerRepository repository)
         {
-            Id = existing.Id,
-            Name = existing.Name,
-            Email = existing.Email
-        });
+            _repository = repository;
+        }
+
+        public async Task<OperationResult<CustomerDto>> Handle(
+            GetCustomerByIdQuery request,
+            CancellationToken cancellationToken)
+        {
+            var customer = await _repository.GetByIdAsync(request.Id);
+
+            if (customer == null)
+                return OperationResult<CustomerDto>.Fail("Customer not found");
+
+            var dto = new CustomerDto(customer.Id, customer.Name, customer.Email);
+            return OperationResult<CustomerDto>.Ok(dto);
+        }
     }
 }

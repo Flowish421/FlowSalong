@@ -1,20 +1,37 @@
-﻿using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
+using FlowSalong.Application.Features.Services.Commands;
+using FlowSalong.Domain.Common.Interfaces;
 using FlowSalong.Application.Features.Services.DTOs;
-using FlowSalong.Domain.Entities;
 using MediatR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace FlowSalong.Application.Features.Services.Commands.Handlers;
-
-public class CreateServiceCommandHandler(IRepository<Service> repository)
-    : IRequestHandler<CreateServiceCommand, OperationResult<ServiceDto>>
+namespace FlowSalong.Application.Features.Services.Commands.Handlers
 {
-    public async Task<OperationResult<ServiceDto>> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
+    public class CreateServiceCommandHandler
+        : IRequestHandler<CreateServiceCommand, OperationResult<ServiceDto>>
     {
-        var entity = new Service { Name = request.Name, Price = request.Price };
-        await repository.AddAsync(entity);
+        private readonly IRepository<FlowSalong.Domain.Entities.Service> _repository;
 
-        var dto = new ServiceDto(entity.Id, entity.Name, entity.Price);
-        return OperationResult<ServiceDto>.Ok(dto);
+        public CreateServiceCommandHandler(IRepository<FlowSalong.Domain.Entities.Service> repository)
+        {
+            _repository = repository;
+        }
+
+        public async Task<OperationResult<ServiceDto>> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
+        {
+            var service = new FlowSalong.Domain.Entities.Service
+            {
+                // Använd Guid som ID om din entity har Guid, annars lämna Id (int) som EF genererar.
+                Name = request.Name,
+                Price = request.Price
+            };
+
+            await _repository.AddAsync(service);
+            return OperationResult<ServiceDto>.Ok(
+                new ServiceDto(service.Id, service.Name, service.Price)
+            );
+        }
     }
 }

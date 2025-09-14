@@ -2,10 +2,8 @@ C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\De
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Infrastructure.runtimeconfig.json
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Infrastructure.dll
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Infrastructure.pdb
-C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Application.dll
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Domain.dll
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Domain.pdb
-C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\bin\Debug\net8.0\FlowSalong.Application.pdb
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\obj\Debug\net8.0\FlowSalong.Infrastructure.csproj.AssemblyReference.cache
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\obj\Debug\net8.0\FlowSalong.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ahmed\source\repos\byttclone av salong\FlowSalong.Infrastructure\obj\Debug\net8.0\FlowSalong.Infrastructure.AssemblyInfoInputs.cache

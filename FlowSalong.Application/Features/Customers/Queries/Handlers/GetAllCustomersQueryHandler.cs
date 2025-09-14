@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
 using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Customers.DTOs;
 using FlowSalong.Application.Features.Customers.Queries;
@@ -7,26 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FlowSalong.Domain.Common.Interfaces;
 
-namespace FlowSalong.Application.Features.Customers.Queries.Handlers;
-
-public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, OperationResult<List<CustomerDto>>>
+namespace FlowSalong.Application.Features.Customers.Queries.Handlers
 {
-    private readonly ICustomerRepository _repository;
-
-    public GetAllCustomersQueryHandler(ICustomerRepository repository) => _repository = repository;
-
-    public async Task<OperationResult<List<CustomerDto>>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+    public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, OperationResult<List<CustomerDto>>>
     {
-        var existing = await _repository.GetAllAsync();
+        private readonly ICustomerRepository _repository;
 
-        var dtos = existing.Select(c => new CustomerDto
+        public GetAllCustomersQueryHandler(ICustomerRepository repository) => _repository = repository;
+
+        public async Task<OperationResult<List<CustomerDto>>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
         {
-            Id = c.Id,
-            Name = c.Name,
-            Email = c.Email
-        }).ToList();
+            var existing = await _repository.GetAllAsync();
 
-        return OperationResult<List<CustomerDto>>.Ok(dtos);
+            var dtos = existing
+                .Select(c => new CustomerDto(c.Id, c.Name, c.Email))
+                .ToList();
+
+            return OperationResult<List<CustomerDto>>.Ok(dtos);
+        }
     }
 }

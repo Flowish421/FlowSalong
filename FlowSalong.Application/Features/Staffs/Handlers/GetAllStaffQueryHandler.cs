@@ -1,33 +1,25 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.DTOs;
-using FlowSalong.Application.Features.Staffs.Queries;
-using FlowSalong.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using FlowSalong.Domain.Common.Interfaces;
 
-namespace FlowSalong.Application.Features.Staffs.Handlers;
-
-public class GetAllStaffQueryHandler : IRequestHandler<GetAllStaffQuery, OperationResult<List<StaffDto>>>
+namespace FlowSalong.Application.Features.Staffs.Handlers
 {
-    private readonly IRepository<Staff> _repository;
-
-    public GetAllStaffQueryHandler(IRepository<Staff> repository) => _repository = repository;
-
-    public async Task<OperationResult<List<StaffDto>>> Handle(GetAllStaffQuery request, CancellationToken cancellationToken)
+    public class GetAllStaffQueryHandler
     {
-        var staffList = await _repository.GetAllAsync();
+        private readonly IFlowSalongDbContext _context;
 
-        var dtos = staffList.Select(s => new StaffDto
+        public GetAllStaffQueryHandler(IFlowSalongDbContext context)
         {
-            Id = s.Id,
-            Name = s.Name,
-            Role = s.Role
-        }).ToList();
+            _context = context;
+        }
 
-        return OperationResult<List<StaffDto>>.Ok(dtos);
+        public OperationResult<List<StaffDto>> Handle()
+        {
+            var staffDtos = _context.Staffs
+                .Select(s => new StaffDto(s.Id, s.Name, s.Role))
+                .ToList();
+
+            return OperationResult<List<StaffDto>>.Ok(staffDtos);
+        }
     }
 }

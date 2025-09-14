@@ -1,32 +1,59 @@
-﻿using FlowSalong.Application.Features.Staffs;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using FlowSalong.Application.Features.Staffs.Commands;
 using FlowSalong.Application.Features.Staffs.Queries;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
-namespace FlowSalong.API.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class StaffController(IMediator mediator) : ControllerBase
+namespace FlowSalong.Api.Controllers
 {
-    [HttpGet]
-    public async Task<IActionResult> GetAll() =>
-        Ok(await mediator.Send(new GetAllStaffQuery()));
+    [ApiController]
+    [Route("api/[controller]")]
+    public class StaffController : ControllerBase
+    {
+        private readonly IMediator _mediator;
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id) =>
-        Ok(await mediator.Send(new GetStaffByIdQuery(id)));
+        public StaffController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateStaffCommand command) =>
-        Ok(await mediator.Send(command));
+        // GET api/staff
+        [HttpGet]
+        public async Task<IActionResult> GetAll() =>
+            Ok(await _mediator.Send(new GetAllStaffQuery()));
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateStaffCommand command) =>
-        Ok(await mediator.Send(command with { Id = id }));
+        // GET api/staff/{id}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id) =>
+            Ok(await _mediator.Send(new GetStaffByIdQuery { Id = id }));
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id) =>
-        Ok(await mediator.Send(new DeleteStaffCommand(id)));
+        // POST api/staff
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateStaffCommand command) =>
+            Ok(await _mediator.Send(command));
+
+        // PUT api/staff/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateStaffCommand command)
+        {
+            // Om UpdateStaffCommand är record: använd with
+            var fixedCommand = command with { Id = id };
+            // Om det är class: command.Id = id;
+
+            var result = await _mediator.Send(fixedCommand);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
+        }
+
+        // DELETE api/staff/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            // Dina staff-kommandon var "record" med ctor(Guid Id) i dina bilder:
+            var result = await _mediator.Send(new DeleteStaffCommand(id));
+            // Om din typ istället är class: new DeleteStaffCommand { Id = id };
+
+            if (!result.Success) return NotFound(result);
+            return Ok(result);
+        }
+    }
 }

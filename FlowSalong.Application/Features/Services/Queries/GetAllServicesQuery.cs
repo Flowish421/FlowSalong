@@ -1,7 +1,7 @@
 ﻿using FlowSalong.Application.Common.Models;
-using MediatR;
-using System.Collections.Generic;
+using FlowSalong.Application.Features.Services.DTOs;
 
-namespace FlowSalong.Application.Features.Services.Queries;
-
-public record GetAllServicesQuery() : IRequest<OperationResult<List<FlowSalong.Application.Features.Services.DTOs.ServiceDto>>>;
+namespace FlowSalong.Application.Features.Services.Queries
+{
+    public class GetAllServicesQuery : MediatR.IRequest<OperationResult<List<ServiceDto>>> { }
+}

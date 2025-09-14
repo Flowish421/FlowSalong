@@ -1,32 +1,36 @@
-﻿using MediatR;
-using FlowSalong.Application.Common.Interfaces;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.DTOs;
 using FlowSalong.Application.Features.Staffs.Queries;
+using FlowSalong.Domain.Common.Interfaces;
 using FlowSalong.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
+using MediatR;
 
-namespace FlowSalong.Application.Features.Staffs.Handlers;
-
-public class GetStaffByIdQueryHandler : IRequestHandler<GetStaffByIdQuery, OperationResult<StaffDto>>
+namespace FlowSalong.Application.Features.Staffs.Queries.Handlers
 {
-    private readonly IRepository<Staff> _repository;
-
-    public GetStaffByIdQueryHandler(IRepository<Staff> repository) => _repository = repository;
-
-    public async Task<OperationResult<StaffDto>> Handle(GetStaffByIdQuery request, CancellationToken cancellationToken)
+    public class GetStaffByIdQueryHandler
+        : IRequestHandler<GetStaffByIdQuery, OperationResult<StaffDto>>
     {
-        var staff = await _repository.GetByIdAsync(request.Id);
+        private readonly IRepository<Staff> _repository;
 
-        if (staff is null)
-            return OperationResult<StaffDto>.Fail("Staff not found");
-
-        return OperationResult<StaffDto>.Ok(new StaffDto
+        public GetStaffByIdQueryHandler(IRepository<Staff> repository)
         {
-            Id = staff.Id,
-            Name = staff.Name,
-            Role = staff.Role
-        });
+            _repository = repository;
+        }
+
+        public async Task<OperationResult<StaffDto>> Handle(
+            GetStaffByIdQuery request,
+            CancellationToken cancellationToken)
+        {
+            // ✅ Hämta Staff via Guid
+            var staff = await _repository.GetByIdAsync(request.Id);
+
+            if (staff == null)
+                return OperationResult<StaffDto>.Fail("Staff not found");
+
+            var dto = new StaffDto(staff.Id, staff.Name, staff.Role);
+            return OperationResult<StaffDto>.Ok(dto);
+        }
     }
 }

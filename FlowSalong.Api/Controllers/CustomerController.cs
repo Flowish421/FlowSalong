@@ -1,7 +1,7 @@
-﻿using FlowSalong.Application.Features.Customers.Commands;
-using FlowSalong.Application.Features.Customers.Queries;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using FlowSalong.Application.Features.Customers.Commands;
+using FlowSalong.Application.Features.Customers.Queries;
 
 namespace FlowSalong.Api.Controllers
 {
@@ -16,6 +16,7 @@ namespace FlowSalong.Api.Controllers
             _mediator = mediator;
         }
 
+        // POST api/customer
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCustomerCommand command)
         {
@@ -24,14 +25,16 @@ namespace FlowSalong.Api.Controllers
             return Ok(result);
         }
 
+        // GET api/customer/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetCustomerByIdQuery(id));
-            if (result == null) return NotFound();
+            var result = await _mediator.Send(new GetCustomerByIdQuery { Id = id });
+            if (!result.Success) return NotFound(result);
             return Ok(result);
         }
 
+        // GET api/customer
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -39,20 +42,30 @@ namespace FlowSalong.Api.Controllers
             return Ok(result);
         }
 
+        // PUT api/customer/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateCustomerCommand command)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateCustomerCommand command)
         {
-            if (id != command.Id) return BadRequest("ID mismatch");
-            var result = await _mediator.Send(command);
+            // om ditt UpdateCustomerCommand är ett "class" med set; set; properties
+            // och Id är Guid:
+            var fixedCommand = command with { Id = id }; // funkar om UpdateCustomerCommand är record
+            // Om UpdateCustomerCommand är "class" (inte record), använd:
+            // command.Id = id;
+
+            var result = await _mediator.Send(fixedCommand);
             if (!result.Success) return BadRequest(result);
             return Ok(result);
         }
 
+        // DELETE api/customer/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            // Om ditt DeleteCustomerCommand är ett class med Id-property:
             var result = await _mediator.Send(new DeleteCustomerCommand(id));
-            if (!result.Success) return BadRequest(result);
+            // Om det istället är class utan ctor: new DeleteCustomerCommand { Id = id }
+
+            if (!result.Success) return NotFound(result);
             return Ok(result);
         }
     }
