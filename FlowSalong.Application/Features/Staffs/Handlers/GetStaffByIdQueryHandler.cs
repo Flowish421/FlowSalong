@@ -1,20 +1,18 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FlowSalong.Application.Common.Models;
+﻿using FlowSalong.Application.Common.Models;
 using FlowSalong.Application.Features.Staffs.DTOs;
 using FlowSalong.Application.Features.Staffs.Queries;
 using FlowSalong.Domain.Common.Interfaces;
-using FlowSalong.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace FlowSalong.Application.Features.Staffs.Queries.Handlers
+namespace FlowSalong.Application.Features.Staffs.Handlers
 {
     public class GetStaffByIdQueryHandler
         : IRequestHandler<GetStaffByIdQuery, OperationResult<StaffDto>>
     {
-        private readonly IRepository<Staff> _repository;
+        private readonly IStaffRepository _repository;
 
-        public GetStaffByIdQueryHandler(IRepository<Staff> repository)
+        public GetStaffByIdQueryHandler(IStaffRepository repository)
         {
             _repository = repository;
         }
@@ -23,14 +21,21 @@ namespace FlowSalong.Application.Features.Staffs.Queries.Handlers
             GetStaffByIdQuery request,
             CancellationToken cancellationToken)
         {
-            // ✅ Hämta Staff via Guid
-            var staff = await _repository.GetByIdAsync(request.Id);
+            try
+            {
+                var staff = await _repository.GetByIdAsync(request.Id);
 
-            if (staff == null)
-                return OperationResult<StaffDto>.Fail("Staff not found");
+                if (staff == null)
+                    return OperationResult<StaffDto>.Fail("Staff not found");
 
-            var dto = new StaffDto(staff.Id, staff.Name, staff.Role);
-            return OperationResult<StaffDto>.Ok(dto);
+                var dto = new StaffDto(staff.Id, staff.Name, staff.Role);
+                return OperationResult<StaffDto>.Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetStaffByIdQueryHandler error: {ex}");
+                return OperationResult<StaffDto>.Fail($"Error fetching staff: {ex.Message}");
+            }
         }
     }
 }
