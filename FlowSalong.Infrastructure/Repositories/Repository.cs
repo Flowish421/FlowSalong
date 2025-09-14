@@ -1,37 +1,56 @@
-﻿using System;
+﻿using FlowSalong.Domain.Common.Interfaces;
+using FlowSalong.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using FlowSalong.Domain.Common.Interfaces;
-using FlowSalong.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace FlowSalong.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly FlowSalongDbContext _context;
-        private readonly DbSet<T> _dbSet;
 
         public Repository(FlowSalongDbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<T>();
         }
 
-        public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+        public async Task<T?> GetByIdAsync(Guid id)
+        {
+            // Byter FindAsync till FirstOrDefaultAsync för bättre stöd med InMemoryDatabase
+            return await _context.Set<T>()
+                .FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
+        }
 
-        public void Delete(T entity) => _dbSet.Remove(entity);
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task AddAsync(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public void Update(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            _context.SaveChanges();
+        }
+
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
+        }
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
-            => await _dbSet.Where(predicate).ToListAsync();
-
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
-
-        // 🔄 Ändra från int till Guid
-        public async Task<T?> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
-
-        public void Update(T entity) => _dbSet.Update(entity);
+        {
+            return await _context.Set<T>().Where(predicate).ToListAsync();
+        }
     }
 }

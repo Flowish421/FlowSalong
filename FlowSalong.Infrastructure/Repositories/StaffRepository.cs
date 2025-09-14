@@ -2,6 +2,10 @@
 using FlowSalong.Domain.Entities;
 using FlowSalong.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FlowSalong.Infrastructure.Repositories
 {
@@ -14,15 +18,20 @@ namespace FlowSalong.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Staff?> GetByIdAsync(Guid id) =>
-            await _context.Staffs.FindAsync(id);
+        public async Task<Staff?> GetByIdAsync(Guid id)
+        {
+            
+            return await _context.Staffs.FirstOrDefaultAsync(s => s.Id == id);
+        }
 
-        public async Task<List<Staff>> GetAllAsync() =>
-            await _context.Staffs.ToListAsync();
+        public async Task<List<Staff>> GetAllAsync()
+        {
+            return await _context.Staffs.ToListAsync();
+        }
 
         public async Task AddAsync(Staff staff)
         {
-            _context.Staffs.Add(staff);
+            await _context.Staffs.AddAsync(staff);
             await _context.SaveChangesAsync(default);
         }
 
